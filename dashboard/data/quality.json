@@ -1,0 +1,16 @@
+[
+  {
+    "report_date": "2026-09-01",
+    "raw_rows": 2030,
+    "duplicate_rows": 30,
+    "written_off_loans": 25,
+    "included_loans": 1975
+  },
+  {
+    "report_date": "2026-10-01",
+    "raw_rows": 2030,
+    "duplicate_rows": 30,
+    "written_off_loans": 8,
+    "included_loans": 1992
+  }
+]

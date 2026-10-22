@@ -1,0 +1,19 @@
+model: credit_portfolio
+source: reporting.v_portfolio_clean
+description: One active loan per report date, amounts in KZT. Always select one date for stock measures.
+dimensions:
+  - {name: report_date, column: report_date, type: date, label: Дата среза}
+  - {name: loan_id, column: loan_id, type: string, label: Кредит}
+  - {name: group_id, column: group_id, type: string, label: Группа связанных заёмщиков}
+  - {name: sector, column: sector, type: string, label: Отрасль}
+  - {name: program, column: program, type: string, label: Программа}
+  - {name: currency, column: currency, type: string, label: Валюта кредита}
+measures:
+  - {name: portfolio, column: outstanding_kzt, type: sum, format: ',.2f', label: Портфель в тенге}
+  - {name: par30_amount, column: par30_kzt, type: sum, format: ',.2f', label: Просрочка свыше 30 дней в тенге}
+  - {name: par90_amount, column: par90_kzt, type: sum, format: ',.2f', label: Просрочка свыше 90 дней в тенге}
+  - {name: npl_amount, column: npl_kzt, type: sum, format: ',.2f', label: NPL в тенге}
+  - {name: provisions, column: provisions_kzt, type: sum, format: ',.2f', label: Провизии в тенге}
+  - {name: loans, column: loan_id, type: count, format: ',.0f', label: Количество кредитов}
+# Ratios use sum(numerator) / sum(outstanding_kzt), never avg of loan ratios
+# Top-10 is non-additive and comes from reporting.v_group_exposure at the whole-portfolio level

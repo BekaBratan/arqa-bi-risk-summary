@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "postgres_version": "18.6",
+  "independent_and_segment_checks": 44,
+  "sql_edge_tests": "passed",
+  "idempotent_reload": "passed",
+  "source_sha256": {
+    "portfolio.csv": "70f6d2bcf918035ad7833de9c973e5821b828eeeebdbc78a7a03a67f78f30de8",
+    "fx.csv": "301b1b1a1d31bee41fd5a204aaeb7d0ad7c9e0ff7d20e9327d4a5ab164f6a4bb"
+  }
+}

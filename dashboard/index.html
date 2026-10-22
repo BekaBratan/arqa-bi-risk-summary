@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARQA · Риск-сводка кредитного портфеля</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0/build/vega.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1/build/vega-lite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0/build/vega-embed.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#12233d;font:14px Arial,sans-serif}
+main{max-width:1240px;margin:auto;padding:32px}header{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}
+.brand{font-weight:700;letter-spacing:2px;color:#2670db;font-size:13px}h1{font-size:30px;margin:9px 0}p{line-height:1.6;color:#536279;margin:5px 0}
+.badge{background:#e1ecfb;color:#195fbd;padding:10px 14px;border-radius:30px;white-space:nowrap;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:white;border:1px solid #e2e8f1;border-radius:14px;padding:20px;min-width:0}
+h2{font-size:15px;margin:0 0 16px}.wide{grid-column:1/-1}.chart{width:100%;min-height:120px}.vega-embed{width:100%}.vega-bindings{font-size:12px;color:#536279;margin-top:8px}
+select{border:1px solid #d4deec;border-radius:5px;padding:4px;background:white}.note{font-size:12px}.error{color:#b03030;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:12px}td,th{text-align:right;padding:10px 8px;border-bottom:1px solid #edf1f6}td:first-child,th:first-child{text-align:left}
+footer{padding:18px 0}.kpi-wrap{display:flex;gap:30px;align-items:center}.kpi-wrap .chart{width:580px;flex-shrink:0}.kpi-note{border-left:3px solid #2670db;padding:0 18px;max-width:420px}
+@media(max-width:1000px){.kpi-wrap{display:block}.kpi-note{margin-top:16px}}@media(max-width:700px){main{padding:16px}.grid{grid-template-columns:1fr}h1{font-size:23px}header{display:block}.badge{display:inline-block;margin-top:10px}.kpi-wrap{overflow:auto}}
+</style>
+<main>
+<header><div><div class="brand">ARQA / PORTFOLIO INTELLIGENCE</div><h1>Риск-сводка кредитного портфеля</h1><p>Два месячных среза · суммы в тенге · без списанных кредитов</p></div><div class="badge">Синтетические данные · 01.10.2026</div></header>
+<div class="grid">
+<section class="card wide"><h2>На 1 октября 2026 года</h2><div class="kpi-wrap"><div id="kpis" class="chart"></div><div class="kpi-note"><h2>Как читать показатели</h2><p class="note">PAR30 и PAR90 показывают долю остатка с просрочкой более 30 и 90 дней. NPL также включает реструктуризированные кредиты.</p><p class="note">Изменения долей указаны в процентных пунктах. Портфель и провизии сравниваются в процентах с 1 сентября.</p></div></div></section>
+<section class="card"><h2>Объём портфеля</h2><div id="portfolio_trend" class="chart"></div></section>
+<section class="card"><h2>Динамика проблемной задолженности</h2><div id="risk_trend" class="chart"></div></section>
+<section class="card"><h2>Отрасли: объём и доля NPL</h2><div id="sector" class="chart"></div></section>
+<section class="card"><h2>Программы: объём и доля NPL</h2><div id="program" class="chart"></div></section>
+<section class="card"><h2>Десять крупнейших групп</h2><div id="concentration" class="chart"></div></section>
+<section class="card"><h2>Контроль загрузки</h2><div id="quality"></div><p class="note">Только полные дубли удалены. Конфликтующие версии и отсутствие курса останавливают загрузку. Для KZT применяется курс 1.</p><p class="note">Концентрация рассчитывается заново на каждую дату по сумме кредитов группы.</p></section>
+</div>
+<footer><p class="note">Провизии: 1% до 30 дней, 10% при 31–90 днях, 50% для NPL. Это правила тестового задания, а не полноценная модель МСФО 9.</p><p class="note">Источник: PostgreSQL reporting.v_* · Независимая сверка: Python Decimal · <a href="data/metrics.json">Итоговые данные JSON</a></p><p id="status" role="status" class="note">Загрузка графиков…</p></footer>
+</main>
+<script>
+async function start(){
+ try {
+  if(typeof vegaEmbed==='undefined') throw Error('Не загрузились библиотеки Vega. Проверьте доступ к cdn.jsdelivr.net.');
+  await Promise.all(['kpis','portfolio_trend','risk_trend','sector','program','concentration'].map(async name=>{
+   const response=await fetch(`specs/${name}.json`);if(!response.ok)throw Error(`Не удалось загрузить ${name}`);
+   const spec=await response.json();await vegaEmbed(`#${name}`,spec,{actions:false,renderer:'svg'});
+  }));
+  const response=await fetch('data/quality.json');if(!response.ok)throw Error('Не удалось загрузить контрольные данные');
+  const rows=await response.json();const table=document.createElement('table');
+  for(const values of [['Дата','Строк CSV','Дубли','Списано','В расчёте'],...rows.map(r=>[r.report_date,r.raw_rows,r.duplicate_rows,r.written_off_loans,r.included_loans])]){
+   const tr=document.createElement('tr');for(const value of values){const td=document.createElement(table.rows.length?'td':'th');td.textContent=value;tr.appendChild(td);}table.appendChild(tr);
+  }
+  document.querySelector('#quality').appendChild(table);document.querySelector('#status').textContent='Все 6 визуализаций загружены';
+ }catch(error){const status=document.querySelector('#status');status.className='error';status.textContent=error.message;}
+}
+start();
+</script>
+</html>

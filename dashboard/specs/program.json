@@ -1,0 +1,199 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "gridColor": "#e8edf3",
+      "domain": false,
+      "labelColor": "#536279",
+      "titleColor": "#536279"
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#12233d"
+    },
+    "legend": {
+      "orient": "bottom"
+    }
+  },
+  "width": "container",
+  "height": 235,
+  "data": {
+    "values": [
+      {
+        "report_date": "2026-09-01",
+        "dimension": "program",
+        "segment": "Инвестиционное кредитование",
+        "portfolio_kzt": 120900947920.905,
+        "npl_kzt": 14854949505.089,
+        "par30_kzt": 16640569861.062,
+        "par90_kzt": 7905920603.0495,
+        "provisions_kzt": 9274053169.923784,
+        "npl_ratio": 0.12286875959655258
+      },
+      {
+        "report_date": "2026-09-01",
+        "dimension": "program",
+        "segment": "Лизинг техники",
+        "portfolio_kzt": 147754752546.006,
+        "npl_kzt": 16258149363.684,
+        "par30_kzt": 15155911089.34,
+        "par90_kzt": 10774173432.128,
+        "provisions_kzt": 9838397102.8143,
+        "npl_ratio": 0.1100346965734435
+      },
+      {
+        "report_date": "2026-09-01",
+        "dimension": "program",
+        "segment": "Пополнение оборотных средств",
+        "portfolio_kzt": 107477673628.79,
+        "npl_kzt": 12526004411.171,
+        "par30_kzt": 13949255350.5425,
+        "par90_kzt": 5295933243.8785,
+        "provisions_kzt": 7991317887.36145,
+        "npl_ratio": 0.11654517620500175
+      },
+      {
+        "report_date": "2026-09-01",
+        "dimension": "program",
+        "segment": "Экспортное финансирование",
+        "portfolio_kzt": 122019854598.872,
+        "npl_kzt": 15396256797.064,
+        "par30_kzt": 14278768767.8355,
+        "par90_kzt": 7121807327.288,
+        "provisions_kzt": 9408490906.199354,
+        "npl_ratio": 0.12617829162047148
+      },
+      {
+        "report_date": "2026-10-01",
+        "dimension": "program",
+        "segment": "Инвестиционное кредитование",
+        "portfolio_kzt": 116592544593.383,
+        "npl_kzt": 12453664298.74,
+        "par30_kzt": 13361643718.431,
+        "par90_kzt": 5695819927.613,
+        "provisions_kzt": 7958145093.49005,
+        "npl_ratio": 0.10681355606546034
+      },
+      {
+        "report_date": "2026-10-01",
+        "dimension": "program",
+        "segment": "Лизинг техники",
+        "portfolio_kzt": 143886096677.144,
+        "npl_kzt": 9781742956.506,
+        "par30_kzt": 16944910732.942,
+        "par90_kzt": 4504620591.345,
+        "provisions_kzt": 7337814233.61311,
+        "npl_ratio": 0.06798254440423505
+      },
+      {
+        "report_date": "2026-10-01",
+        "dimension": "program",
+        "segment": "Пополнение оборотных средств",
+        "portfolio_kzt": 104960631022.517,
+        "npl_kzt": 11822701019.03,
+        "par30_kzt": 8822019950.306,
+        "par90_kzt": 4875331570.848,
+        "provisions_kzt": 7197931763.70109,
+        "npl_ratio": 0.11263938587120059
+      },
+      {
+        "report_date": "2026-10-01",
+        "dimension": "program",
+        "segment": "Экспортное финансирование",
+        "portfolio_kzt": 119235498539.714,
+        "npl_kzt": 14475175227.76,
+        "par30_kzt": 10920803816.104,
+        "par90_kzt": 6563476365.28,
+        "provisions_kzt": 8677350317.5737,
+        "npl_ratio": 0.12139988011153176
+      }
+    ]
+  },
+  "params": [
+    {
+      "name": "snapshot",
+      "value": "2026-10-01",
+      "bind": {
+        "input": "select",
+        "options": [
+          "2026-09-01",
+          "2026-10-01"
+        ],
+        "name": "Дата: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.report_date === snapshot"
+    },
+    {
+      "calculate": "datum.portfolio_kzt / 1e9",
+      "as": "billions"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "segment",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": {
+        "labelLimit": 170
+      }
+    },
+    "x": {
+      "field": "billions",
+      "type": "quantitative",
+      "title": "Портфель, млрд ₸"
+    },
+    "color": {
+      "field": "npl_ratio",
+      "type": "quantitative",
+      "title": "NPL",
+      "scale": {
+        "domain": [
+          0,
+          0.4
+        ],
+        "range": [
+          "#c9ddfa",
+          "#195fbd"
+        ]
+      },
+      "legend": {
+        "format": ".0%"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "segment",
+        "title": "Сегмент"
+      },
+      {
+        "field": "portfolio_kzt",
+        "format": ",.2f",
+        "title": "Портфель, ₸"
+      },
+      {
+        "field": "npl_ratio",
+        "format": ".2%",
+        "title": "NPL"
+      },
+      {
+        "field": "provisions_kzt",
+        "format": ",.2f",
+        "title": "Провизии, ₸"
+      }
+    ]
+  }
+}

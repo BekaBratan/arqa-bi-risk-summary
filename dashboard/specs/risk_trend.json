@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "gridColor": "#e8edf3",
+      "domain": false,
+      "labelColor": "#536279",
+      "titleColor": "#536279"
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#12233d"
+    },
+    "legend": {
+      "orient": "bottom"
+    }
+  },
+  "width": "container",
+  "height": 185,
+  "data": {
+    "values": [
+      {
+        "date": "2026-09-01",
+        "metric": "PAR30",
+        "value": 0.12049406008283074
+      },
+      {
+        "date": "2026-09-01",
+        "metric": "PAR90",
+        "value": 0.062426243201990084
+      },
+      {
+        "date": "2026-09-01",
+        "metric": "NPL",
+        "value": 0.11850843611254334
+      },
+      {
+        "date": "2026-10-01",
+        "metric": "PAR30",
+        "value": 0.10326384047551972
+      },
+      {
+        "date": "2026-10-01",
+        "metric": "PAR90",
+        "value": 0.04464694627679072
+      },
+      {
+        "date": "2026-10-01",
+        "metric": "NPL",
+        "value": 0.10013577438463969
+      }
+    ]
+  },
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "ordinal",
+      "title": null,
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": null,
+      "axis": {
+        "format": ".0%"
+      },
+      "scale": {
+        "zero": true
+      }
+    },
+    "color": {
+      "field": "metric",
+      "title": null,
+      "scale": {
+        "domain": [
+          "PAR30",
+          "PAR90",
+          "NPL"
+        ],
+        "range": [
+          "#2670db",
+          "#91a8c8",
+          "#e18a3a"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "date",
+        "title": "Дата"
+      },
+      {
+        "field": "metric",
+        "title": "Метрика"
+      },
+      {
+        "field": "value",
+        "format": ".2%",
+        "title": "Доля"
+      }
+    ]
+  }
+}

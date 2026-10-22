@@ -1,0 +1,375 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "gridColor": "#e8edf3",
+      "domain": false,
+      "labelColor": "#536279",
+      "titleColor": "#536279"
+    },
+    "title": {
+      "anchor": "start",
+      "color": "#12233d"
+    },
+    "legend": {
+      "orient": "bottom"
+    }
+  },
+  "concat": [
+    {
+      "title": {
+        "text": "Портфель",
+        "fontSize": 13,
+        "fontWeight": "normal"
+      },
+      "width": 160,
+      "height": 66,
+      "data": {
+        "values": [
+          {
+            "value": "484.67 млрд ₸",
+            "change": "-2.71 % к 01.09"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "color": "#12233d"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 22
+            },
+            "text": {
+              "field": "value"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 12,
+            "color": "#526479"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 52
+            },
+            "text": {
+              "field": "change"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "PAR30",
+        "fontSize": 13,
+        "fontWeight": "normal"
+      },
+      "width": 160,
+      "height": 66,
+      "data": {
+        "values": [
+          {
+            "value": "10.33%",
+            "change": "-1.72 п.п. к 01.09"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "color": "#12233d"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 22
+            },
+            "text": {
+              "field": "value"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 12,
+            "color": "#526479"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 52
+            },
+            "text": {
+              "field": "change"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "PAR90",
+        "fontSize": 13,
+        "fontWeight": "normal"
+      },
+      "width": 160,
+      "height": 66,
+      "data": {
+        "values": [
+          {
+            "value": "4.46%",
+            "change": "-1.78 п.п. к 01.09"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "color": "#12233d"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 22
+            },
+            "text": {
+              "field": "value"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 12,
+            "color": "#526479"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 52
+            },
+            "text": {
+              "field": "change"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "NPL",
+        "fontSize": 13,
+        "fontWeight": "normal"
+      },
+      "width": 160,
+      "height": 66,
+      "data": {
+        "values": [
+          {
+            "value": "10.01%",
+            "change": "-1.84 п.п. к 01.09"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "color": "#12233d"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 22
+            },
+            "text": {
+              "field": "value"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 12,
+            "color": "#526479"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 52
+            },
+            "text": {
+              "field": "change"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Провизии",
+        "fontSize": 13,
+        "fontWeight": "normal"
+      },
+      "width": 160,
+      "height": 66,
+      "data": {
+        "values": [
+          {
+            "value": "31.17 млрд ₸",
+            "change": "-14.63 % к 01.09"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "color": "#12233d"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 22
+            },
+            "text": {
+              "field": "value"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 12,
+            "color": "#526479"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 52
+            },
+            "text": {
+              "field": "change"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Top-10 групп",
+        "fontSize": 13,
+        "fontWeight": "normal"
+      },
+      "width": 160,
+      "height": 66,
+      "data": {
+        "values": [
+          {
+            "value": "17.02%",
+            "change": "-0.03 п.п. к 01.09"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "color": "#12233d"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 22
+            },
+            "text": {
+              "field": "value"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "fontSize": 12,
+            "color": "#526479"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 52
+            },
+            "text": {
+              "field": "change"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "columns": 3,
+  "spacing": 30
+}
